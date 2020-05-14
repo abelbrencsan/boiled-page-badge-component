@@ -1,0 +1,29 @@
+/* Badge component prototype */
+span.badge {
+	background-color: darken($border-bg-color, 5);
+	border-radius: $border-radius;
+	color: $fg-color !important;
+	cursor: default;
+	display: inline-block;
+	font-size: $small-font-size;
+	padding: 0.25em 0.5em;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	white-space: nowrap;
+}
+
+/* Badge component extensions */
+span.badge {
+
+	// Scheme specific badges
+	@each $scheme in map-keys($schemes) {
+		@if (map-val($schemes, $scheme, generate-badge)) {
+			&.badge--#{$scheme} {
+				background-color: map-val($schemes, $scheme, bg-color);
+				color: map-val($schemes, $scheme, fg-bold-color) !important;
+			}
+		}
+	}
+}
